@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<div>
+    <h2>Here is a list of all the surveys taken to date:</h2>
+    <ul>
+        <div *ngFor="let id of ids">
+            <li><a role="button" routerLink="/student/{{id.sid}}">{{id.sid}}</a></li>
+        </div>
+    </ul>
+    <h4>Click <a role="button" routerLink="/">here</a> to go back to the home page</h4>
+</div>
