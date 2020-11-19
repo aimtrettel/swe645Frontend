@@ -1,6 +1,12 @@
-FROM ubuntu:16.04
-RUN apt update
-RUN apt install -y apache2
-COPY dist /var/www/html
-CMD /usr/sbin/apache2ctl -D FOREGROUND
-EXPOSE 80
+# Stage 1
+FROM node:10-alpine as build-step
+RUN mkdir -p /app
+WORKDIR /app
+COPY package.json /app
+RUN npm install
+COPY . /app
+RUN npm run build --prod
+
+# Stage 2
+FROM nginx:1.17.1-alpine
+COPY --from=build-step /app/docs /usr/share/nginx/html

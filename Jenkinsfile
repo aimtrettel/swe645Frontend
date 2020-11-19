@@ -12,7 +12,7 @@ pipeline {
           checkout scm
           sh 'rm -rf *.war'
           sh 'jar -cvf Frontend.war *'
-          frontendImage = docker.build("aimnissley/swe645:F-$BUILD_NUMBER", "Frontend")
+          frontendImage = docker.build("aimnissley/swe645:F-$BUILD_NUMBER")
         }
       }
     }
